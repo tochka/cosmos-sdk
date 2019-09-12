@@ -229,7 +229,7 @@ func printAndValidateSigs(
 			}
 
 			sigBytes := types.StdSignBytes(
-				chainID, acc.GetAccountNumber(), acc.GetSequence(),
+				acc.GetAccountNumber(), acc.GetSequence(),
 				stdTx.Fee, stdTx.GetMsgs(), stdTx.GetMemo(),
 			)
 
