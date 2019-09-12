@@ -141,7 +141,7 @@ func NewAnteHandler(ak AccountKeeper, supplyKeeper types.SupplyKeeper, sigGasCon
 			}
 
 			// check signature, return account with incremented nonce
-			signBytes := GetSignBytes(newCtx.ChainID(), stdTx, signerAccs[i], isGenesis)
+			signBytes := GetSignBytes(stdTx, signerAccs[i], isGenesis)
 			signerAccs[i], res = processSig(newCtx, signerAccs[i], stdSigs[i], signBytes, simulate, params, sigGasConsumer)
 			if !res.IsOK() {
 				return newCtx, res, true
@@ -410,13 +410,11 @@ func SetGasMeter(simulate bool, ctx sdk.Context, gasLimit uint64) sdk.Context {
 
 // GetSignBytes returns a slice of bytes to sign over for a given transaction
 // and an account.
-func GetSignBytes(chainID string, stdTx StdTx, acc Account, genesis bool) []byte {
+func GetSignBytes(stdTx StdTx, acc Account, genesis bool) []byte {
 	var accNum uint64
 	if !genesis {
 		accNum = acc.GetAccountNumber()
 	}
 
-	return StdSignBytes(
-		chainID, accNum, acc.GetSequence(), stdTx.Fee, stdTx.Msgs, stdTx.Memo,
-	)
+	return StdSignBytes(accNum, acc.GetSequence(), stdTx.Fee, stdTx.Msgs, stdTx.Memo)
 }

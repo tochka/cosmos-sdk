@@ -197,7 +197,7 @@ func (bldr TxBuilder) BuildSignMsg(msgs []sdk.Msg) (StdSignMsg, error) {
 	}
 
 	return StdSignMsg{
-		ChainID:       bldr.chainID,
+		// ChainID:       bldr.chainID,
 		AccountNumber: bldr.accountNumber,
 		Sequence:      bldr.sequence,
 		Memo:          bldr.memo,
@@ -249,7 +249,7 @@ func (bldr TxBuilder) SignStdTx(name, passphrase string, stdTx StdTx, appendSig 
 	}
 
 	stdSignature, err := MakeSignature(bldr.keybase, name, passphrase, StdSignMsg{
-		ChainID:       bldr.chainID,
+		// ChainID:       bldr.chainID,
 		AccountNumber: bldr.accountNumber,
 		Sequence:      bldr.sequence,
 		Fee:           stdTx.Fee,

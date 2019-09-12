@@ -158,27 +158,27 @@ func (fee StdFee) GasPrices() sdk.DecCoins {
 // and the Sequence numbers for each signature (prevent
 // inchain replay and enforce tx ordering per account).
 type StdSignDoc struct {
-	AccountNumber uint64            `json:"account_number" yaml:"account_number"`
-	ChainID       string            `json:"chain_id" yaml:"chain_id"`
-	Fee           json.RawMessage   `json:"fee" yaml:"fee"`
-	Memo          string            `json:"memo" yaml:"memo"`
-	Msgs          []json.RawMessage `json:"msgs" yaml:"msgs"`
-	Sequence      uint64            `json:"sequence" yaml:"sequence"`
+	AccountNumber uint64 `json:"account_number" yaml:"account_number"`
+	// ChainID       string            `json:"chain_id" yaml:"chain_id"`
+	Fee      json.RawMessage   `json:"fee" yaml:"fee"`
+	Memo     string            `json:"memo" yaml:"memo"`
+	Msgs     []json.RawMessage `json:"msgs" yaml:"msgs"`
+	Sequence uint64            `json:"sequence" yaml:"sequence"`
 }
 
 // StdSignBytes returns the bytes to sign for a transaction.
-func StdSignBytes(chainID string, accnum uint64, sequence uint64, fee StdFee, msgs []sdk.Msg, memo string) []byte {
+func StdSignBytes(accnum uint64, sequence uint64, fee StdFee, msgs []sdk.Msg, memo string) []byte {
 	var msgsBytes []json.RawMessage
 	for _, msg := range msgs {
 		msgsBytes = append(msgsBytes, json.RawMessage(msg.GetSignBytes()))
 	}
 	bz, err := ModuleCdc.MarshalJSON(StdSignDoc{
 		AccountNumber: accnum,
-		ChainID:       chainID,
-		Fee:           json.RawMessage(fee.Bytes()),
-		Memo:          memo,
-		Msgs:          msgsBytes,
-		Sequence:      sequence,
+		// ChainID:       chainID,
+		Fee:      json.RawMessage(fee.Bytes()),
+		Memo:     memo,
+		Msgs:     msgsBytes,
+		Sequence: sequence,
 	})
 	if err != nil {
 		panic(err)
