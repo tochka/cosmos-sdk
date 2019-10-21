@@ -171,7 +171,8 @@ func formatTxResult(cdc *codec.Codec, resTx *ctypes.ResultTx, resBlock *ctypes.R
 func parseTx(cdc *codec.Codec, txBytes []byte) (sdk.Tx, error) {
 	var tx types.StdTx
 
-	err := cdc.UnmarshalBinaryLengthPrefixed(txBytes, &tx)
+	// err := cdc.UnmarshalBinaryLengthPrefixed(txBytes, &tx)
+	err := cdc.UnmarshalJSON(txBytes, &tx)
 	if err != nil {
 		return nil, err
 	}

@@ -94,10 +94,10 @@ func DeliverGenTxs(ctx sdk.Context, cdc *codec.Codec, genTxs []json.RawMessage,
 	stakingKeeper types.StakingKeeper, deliverTx deliverTxfn) []abci.ValidatorUpdate {
 
 	for _, genTx := range genTxs {
-		var tx authtypes.StdTx
-		cdc.MustUnmarshalJSON(genTx, &tx)
-		bz := cdc.MustMarshalBinaryLengthPrefixed(tx)
-		res := deliverTx(abci.RequestDeliverTx{Tx: bz})
+		// var tx authtypes.StdTx
+		// cdc.MustUnmarshalJSON(genTx, &tx)
+		// bz := cdc.MustMarshalBinaryLengthPrefixed(tx)
+		res := deliverTx(abci.RequestDeliverTx{Tx: genTx})
 		if !res.IsOK() {
 			panic(res.Log)
 		}
