@@ -3,6 +3,7 @@ package keys
 import (
 	cryptoAmino "github.com/tendermint/tendermint/crypto/encoding/amino"
 
+	"github.com/cosmos/cosmos-sdk/crypto/virgil"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/crypto/keys/hd"
 )
@@ -12,6 +13,7 @@ var cdc *codec.Codec
 func init() {
 	cdc = codec.New()
 	cryptoAmino.RegisterAmino(cdc)
+	virgil.RegisterAmino(cdc)
 	cdc.RegisterInterface((*Info)(nil), nil)
 	cdc.RegisterConcrete(hd.BIP44Params{}, "crypto/keys/hd/BIP44Params", nil)
 	cdc.RegisterConcrete(localInfo{}, "crypto/keys/localInfo", nil)

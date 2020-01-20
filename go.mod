@@ -3,6 +3,7 @@ module github.com/cosmos/cosmos-sdk
 go 1.13
 
 require (
+	github.com/VirgilSecurity/virgil-sdk-go/v6 v6.0.1
 	github.com/bartekn/go-bip39 v0.0.0-20171116152956-a05967ea095d
 	github.com/bgentry/speakeasy v0.1.0
 	github.com/btcsuite/btcd v0.0.0-20190115013929-ed77733ec07d
@@ -27,5 +28,6 @@ require (
 	github.com/tendermint/iavl v0.12.4
 	github.com/tendermint/tendermint v0.32.8
 	github.com/tendermint/tm-db v0.2.0
+	golang.org/x/crypto v0.0.0-20191206172530-e9b2fee46413
 	gopkg.in/yaml.v2 v2.2.7
 )
