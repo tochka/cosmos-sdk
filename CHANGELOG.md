@@ -35,6 +35,71 @@ Ref: https://keepachangelog.com/en/1.0.0/
 
 ## [Unreleased]
 
+## [v0.37.5] - 2020-01-07
+
+### Features
+
+* (types) [\#5360](https://github.com/cosmos/cosmos-sdk/pull/5360) Implement `SortableDecBytes` which
+  allows the `Dec` type be sortable.
+
+### Improvements
+
+* (tendermint) Bump Tendermint version to [v0.32.8](https://github.com/tendermint/tendermint/releases/tag/v0.32.8)
+* (cli) [\#5482](https://github.com/cosmos/cosmos-sdk/pull/5482) Remove old "tags" nomenclature from the `q txs` command in
+  favor of the new events system. Functionality remains unchanged except that `=` is used instead of `:` to be
+  consistent with the API's use of event queries.
+
+### Bug Fixes
+
+* (iavl) [\#5276](https://github.com/cosmos/cosmos-sdk/issues/5276) Fix potential race condition in `iavlIterator#Close`.
+* (baseapp) [\#5350](https://github.com/cosmos/cosmos-sdk/issues/5350) Allow a node to restart successfully
+  after a `halt-height` or `halt-time` has been triggered.
+* (types) [\#5395](https://github.com/cosmos/cosmos-sdk/issues/5395) Fix `Uint#LTE`.
+* (types) [\#5408](https://github.com/cosmos/cosmos-sdk/issues/5408) `NewDecCoins` constructor now sorts the coins.
+
+## [v0.37.4] - 2019-11-04
+
+### Improvements
+
+* (tendermint) Bump Tendermint version to [v0.32.7](https://github.com/tendermint/tendermint/releases/tag/v0.32.7)
+* (ledger) [\#4716](https://github.com/cosmos/cosmos-sdk/pull/4716) Fix ledger custom coin type support bug.
+
+### Bug Fixes
+
+* (baseapp) [\#5200](https://github.com/cosmos/cosmos-sdk/issues/5200) Remove duplicate events from previous messages.
+
+## [v0.37.3] - 2019-10-10
+
+### Bug Fixes
+
+* (genesis) [\#5095](https://github.com/cosmos/cosmos-sdk/issues/5095) Fix genesis file migration from v0.34 to
+v0.36/v0.37 not converting validator consensus pubkey to bech32 format.
+
+### Improvements
+
+* (tendermint) Bump Tendermint version to [v0.32.6](https://github.com/tendermint/tendermint/releases/tag/v0.32.6)
+
+## [v0.37.1] - 2019-09-19
+
+### Features
+
+* (cli) [\#4973](https://github.com/cosmos/cosmos-sdk/pull/4973) Enable application CPU profiling
+via the `--cpu-profile` flag.
+* [\#4979](https://github.com/cosmos/cosmos-sdk/issues/4979) Introduce a new `halt-time` config and
+CLI option to the `start` command. When provided, an application will halt during `Commit` when the
+block time is >= the `halt-time`.
+
+### Improvements
+
+* [\#4990](https://github.com/cosmos/cosmos-sdk/issues/4990) Add `Events` to the `ABCIMessageLog` to
+provide context and grouping of events based on the messages they correspond to. The `Events` field
+in `TxResponse` is deprecated and will be removed in the next major release.
+
+### Bug Fixes
+
+* [\#4979](https://github.com/cosmos/cosmos-sdk/issues/4979) Use `Signal(os.Interrupt)` over
+`os.Exit(0)` during configured halting to allow any `defer` calls to be executed.
+
 ## [v0.37.0] - 2019-08-21
 
 ### Bug Fixes
@@ -2535,6 +2600,10 @@ BUG FIXES:
 
 <!-- Release links -->
 
-[Unreleased]: https://github.com/cosmos/cosmos-sdk/compare/v0.37.0...HEAD
+[Unreleased]: https://github.com/cosmos/cosmos-sdk/compare/v0.37.5...HEAD
+[v0.37.5]: https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.5
+[v0.37.4]: https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.4
+[v0.37.3]: https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.3
+[v0.37.1]: https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.1
 [v0.37.0]: https://github.com/cosmos/cosmos-sdk/releases/tag/v0.37.0
 [v0.36.0]: https://github.com/cosmos/cosmos-sdk/releases/tag/v0.36.0

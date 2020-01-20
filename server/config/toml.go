@@ -18,9 +18,18 @@ const defaultConfigTemplate = `# This is a TOML config file.
 # specified in this config (e.g. 0.25token1;0.0001token2).
 minimum-gas-prices = "{{ .BaseConfig.MinGasPrices }}"
 
-# HaltHeight contains a non-zero height at which a node will gracefully halt
-# and shutdown that can be used to assist upgrades and testing.
+# HaltHeight contains a non-zero block height at which a node will gracefully
+# halt and shutdown that can be used to assist upgrades and testing.
+#
+# Note: Commitment of state will be attempted on the corresponding block.
 halt-height = {{ .BaseConfig.HaltHeight }}
+
+# HaltTime contains a non-zero minimum block time (in Unix seconds) at which
+# a node will gracefully halt and shutdown that can be used to assist upgrades
+# and testing.
+#
+# Note: Commitment of state will be attempted on the corresponding block.
+halt-time = {{ .BaseConfig.HaltTime }}
 `
 
 var configTemplate *template.Template
