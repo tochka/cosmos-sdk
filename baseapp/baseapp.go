@@ -9,6 +9,7 @@ import (
 	"sort"
 	"strings"
 	"syscall"
+	"time"
 
 	"errors"
 
@@ -119,6 +120,11 @@ func NewBaseApp(
 		option(app)
 	}
 
+	// try to fix restart node and check Tx from not 0 account's number
+	app.setCheckState(abci.Header{
+		Height: app.LastBlockHeight(),
+		Time:   time.Now(),
+	})
 	return app
 }
 
