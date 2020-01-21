@@ -119,13 +119,6 @@ func NewBaseApp(
 	for _, option := range options {
 		option(app)
 	}
-
-	// try to fix restart node and check Tx from not 0 account's number
-	app.cms.LoadLatestVersion()
-	app.setCheckState(abci.Header{
-		Height: app.LastBlockHeight(),
-		Time:   time.Now(),
-	})
 	return app
 }
 
@@ -265,7 +258,11 @@ func (app *BaseApp) initFromMainStore(baseKey *sdk.KVStoreKey) error {
 	}
 
 	// needed for the export command which inits from store but never calls initchain
-	app.setCheckState(abci.Header{})
+	// try to fix restart node and check Tx from not 0 account's number
+	app.setCheckState(abci.Header{
+		Height: app.LastBlockHeight(),
+		Time:   time.Now(),
+	})
 	app.Seal()
 
 	return nil
