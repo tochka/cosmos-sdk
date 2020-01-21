@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
+	"github.com/cosmos/cosmos-sdk/crypto/virgil"
 	"github.com/tendermint/go-amino"
 	cryptoamino "github.com/tendermint/tendermint/crypto/encoding/amino"
 	tmtypes "github.com/tendermint/tendermint/types"
@@ -20,6 +21,7 @@ func New() *Codec {
 // Register the go-crypto to the codec
 func RegisterCrypto(cdc *Codec) {
 	cryptoamino.RegisterAmino(cdc)
+	virgil.RegisterAmino(cdc)
 }
 
 // RegisterEvidences registers Tendermint evidence types with the provided codec.
